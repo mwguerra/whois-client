@@ -7,12 +7,12 @@ A Whois client for Node.js built with typescript to lookup domain information.
 Install via NPM
 
 ```bash
-npm i whois-client --save
+npm i @mwguerra/whois-client --save
 ```
 
 or install via Yarn
 ```bash
-yarn add whois-client
+yarn add @mwguerra/whois-client
 ```
 
 ## Usage in code
@@ -22,7 +22,7 @@ Import the package and use it!
 Javascript example:
 ```javascript
 // Javascript
-const whoisClient = require("whois-client")
+const whoisClient = require("@mwguerra/whois-client")
 
 async function whoisLookup(hostname) {
   return await whoisClient(hostname)
@@ -34,7 +34,7 @@ whoisLookup("https://www.google.com")
 Typescript example:
 ```typescript
 // Typescript
-import whoisClient from "rdap-client"
+import whoisClient from "@mwguerra/rdap-client"
 
 const whoisLookup = async (hostname) => await whoisClient(hostname)
 
