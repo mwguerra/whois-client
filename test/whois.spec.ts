@@ -1,6 +1,6 @@
 // @ts-ignore
 import assert from "assert";
-import whoisClient from "../src";
+import { whoisClient } from "../src";
 import { ERRORS } from "../src/constants";
 import { dedent } from 'ts-dedent';
 import { WhoisData } from "../src/libraries/WhoisData";
