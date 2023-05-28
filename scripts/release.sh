@@ -37,4 +37,5 @@ git commit -m "chore: release v$nextVersion"
 git tag v$nextVersion
 git push
 git push --tags
-npm publish
+
+npm publish --access=public
