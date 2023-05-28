@@ -33,6 +33,8 @@
     "whois": "^2.6.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "chai": "^4.3.7",
     "conventional-changelog-cli": "^2.2.2",
     "mocha": "^10.2.0",
     "tempfile": "^5.0.0",
