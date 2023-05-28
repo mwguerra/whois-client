@@ -146,7 +146,7 @@ describe("whois", function() {
 			For more information on Whois status codes, please visitconst
 			https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en
 			--`)
-            const cleaned = new WhoisData().parse(rawData)
+            const cleaned = new WhoisData(rawData).parse().getParsed()
             const correct = {
                 "domainName": "google.com",
                 "registryDomainId": "2138514_DOMAIN_COM-VRSN",
@@ -256,16 +256,16 @@ describe("whois", function() {
 			Name Server:jm2.dns.com
 			DNSSEC:unsigned
 			URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
-			>>> Last update of WHOIS database: 2018-12-23T14:08:06.00Z <<<: 
-			
+			>>> Last update of WHOIS database: 2018-12-23T14:08:06.00Z <<<:
+
 			For more information on Whois status codes, please visit https://icann.org/epp
-			
+
 			The Data in Paycenter's WHOIS database is provided by Paycenter
 			for information purposes, and to assist persons in obtaining
 			information about or related to a domain name registration record.
 			Paycenter does not guarantee its accuracy.  By submitting
 			a WHOIS query, you agree that you will use this Data only
-			for lawful purposes and that, 
+			for lawful purposes and that,
 			under no circumstances will you use this Data to:
 			(1) allow, enable, or otherwise support the transmission
 			of mass unsolicited, commercial advertising or solicitations
@@ -275,7 +275,7 @@ describe("whois", function() {
 			Paycenter reserves the right to modify these terms at any time.
 			By submitting this query, you agree to abide by this policy.!!
 		`)
-            const cleaned = new WhoisData().parse(rawData)
+            const cleaned = new WhoisData(rawData).parse().getParsed()
             const correct = {
                 "domainName": "addlvr.com",
                 "registryDomainId": "2323887016_DOMAIN_COM-VRSN",
