@@ -2,6 +2,7 @@
 import whois from "whois";
 import { ERRORS } from "./constants";
 import { WhoisClient } from "./libraries/WhoisClient";
+import { WhoisData, WhoisResponse } from "./libraries/WhoisData";
 
 const whoisClient = async (domain: string, options: object = {}): Promise<{ [key: string]: string }> => {
     const whoisClient = new WhoisClient()
@@ -24,4 +25,4 @@ const whoisClient = async (domain: string, options: object = {}): Promise<{ [key
     return jsonResponse
 };
 
-export default whoisClient;
+export { whoisClient, WhoisClient, WhoisData, WhoisResponse };

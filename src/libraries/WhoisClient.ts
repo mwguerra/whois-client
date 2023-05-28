@@ -59,17 +59,21 @@ class WhoisClient {
   }
 
   protected convertToJSON(rawData: string): object {
-    const whoisData = new WhoisData()
-    let result: {};
+    let whoisData: WhoisData;
+    let result: object | undefined;
 
     if (typeof rawData === 'object') {
       result = Object.fromEntries(Object.entries(rawData).map(([key, value]) => {
-        // @ts-ignore
-        const newValue = (value && typeof value === 'object' && value.hasOwnProperty('data')) ? {...value, data: whoisData.parse(value.data)} : value
-        return [key, newValue]
+        if (typeof value === 'object' && value !== null && 'data' in value && typeof value.data === 'string') {
+          whoisData = new WhoisData(value.data);
+          const newValue = (value && typeof value === 'object' && value.hasOwnProperty('data')) ? {...value, data: whoisData.parse().getParsed()} : value;
+          return [key, newValue];
+        }
+        return [key, value];
       }));
     } else {
-      result = whoisData.parse(rawData);
+      whoisData = new WhoisData(rawData)
+      result = whoisData.parse().getParsed() ?? {};
     }
 
     if (Object.keys(result).length === 0) {

@@ -1,7 +1,7 @@
 import {ERRORS} from "../constants";
 
 class DomainHelper {
-  protected isFullyQualifiedDomainName(domain: string): boolean {
+  public isFullyQualifiedDomainName(domain: string): boolean {
     const parts = this.getUrl(domain).hostname.split(".");
     const topLevelDomain = parts[parts.length - 1];
 
