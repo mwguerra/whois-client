@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/mwguerra/whois-client/compare/v1.0.1...v1.0.2) (2023-05-29)
+
+
+### Bug Fixes
+
+* multiple problems in WhoisData build output ([51bbf75](https://github.com/mwguerra/whois-client/commit/51bbf7526f767eed0df8de712fec4de138f254e6))
+
+
+
 ## [1.0.1](https://github.com/mwguerra/whois-client/compare/v1.0.0...v1.0.1) (2023-05-28)
 
 
