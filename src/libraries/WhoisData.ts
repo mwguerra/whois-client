@@ -16,16 +16,20 @@ interface WhoisResponse {
 }
 
 class WhoisData {
-  protected rawData: string;
-  protected parsedData: object | undefined;
-  protected whoisResponse: any;
+  protected rawData: string | undefined;
+  protected whoisResponse: { [key: string]: string } | undefined;
   protected currentServer: any;
 
-  constructor(rawData: string) {
-    this.rawData = rawData
+  constructor(data: string | { [key: string]: string }) {
+    this.rawData = (typeof data === 'string') ? data : undefined
+    this.whoisResponse = (typeof data === 'object')? data : undefined
   }
 
   public parse() {
+    if (!this.rawData || typeof this.rawData !== 'string') {
+      throw new Error('rawData is missing or is not a string');
+    }
+
     const decodedRawData: string = decode(this.rawData)
 
     let result: { [key: string]: string } = {};
@@ -58,29 +62,47 @@ class WhoisData {
         }
       });
 
-    this.parsedData = result;
+    this.whoisResponse = result;
 
     return this;
   }
 
   public getParsed() {
-    return this.parsedData;
+    if (!this.whoisResponse || typeof this.whoisResponse !== 'object') {
+      throw new Error('whoisResponse is missing or is not an object. Run the parser first.');
+    }
+    return this.whoisResponse;
   }
 
   protected fetchData(keyIncludes: string[], processor?: (data: any) => any) {
-    for (const server of this.whoisResponse) {
-      this.currentServer = server;  // Set current server here
-      const dataKeys = Object.keys(server?.data);
-      const targetKeys = dataKeys.filter(key => keyIncludes.some(inclusion => key.includes(inclusion)));
+    if (!this.whoisResponse || typeof this.whoisResponse !== 'object') {
+      throw new Error('whoisResponse is missing or is not an object');
+    }
 
-      for (const key of targetKeys) {
-        const data = server.data[key];
-        if (data) {
-          return processor ? processor(data) : data;
-        }
+    // Check for the exact key match first
+    for (const key of keyIncludes) {
+      const exactMatchData = this.whoisResponse[key];
+      if (exactMatchData) {
+        return processor ? processor(exactMatchData) : exactMatchData;
+      }
+    }
+
+    // If no exact match found, perform partial key match
+    const whoisResponseEntries = Object.entries(this.whoisResponse || {});
+    for (const [key, data] of whoisResponseEntries) {
+      if (keyIncludes.some(inclusion => key.includes(inclusion)) && data) {
+        return processor ? processor(data) : data;
       }
     }
     return null;
+  }
+
+  protected isBrDomain() {
+    if (!this.whoisResponse || typeof this.whoisResponse !== 'object') {
+      throw new Error('whoisResponse is missing or is not an object');
+    }
+
+    return this.whoisResponse?.domainName?.endsWith('.br') || this.whoisResponse?.domain?.endsWith('.br') || false;
   }
 
   protected getExpirationDate() {
@@ -109,15 +131,6 @@ class WhoisData {
 
   protected getRegistrarTech() {
     return this.fetchData(['techC']) || (this.isBrDomain() ? this.currentServer.data.techC : null);
-  }
-
-  protected isBrDomain() {
-    for (const server of this.whoisResponse) {
-      if (server.data.domain?.endsWith('.br')) {
-        return true;
-      }
-    }
-    return false;
   }
 
   public buildResponse(): WhoisResponse {

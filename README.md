@@ -22,7 +22,7 @@ Import the package and use it!
 Javascript example:
 ```javascript
 // Javascript
-const whoisClient = require("@mwguerra/whois-client")
+const { whoisClient } = require("@mwguerra/whois-client")
 
 async function whoisLookup(hostname) {
   return await whoisClient(hostname)
@@ -34,7 +34,7 @@ whoisLookup("https://www.google.com")
 Typescript example:
 ```typescript
 // Typescript
-import whoisClient from "@mwguerra/rdap-client"
+import { whoisClient } from "@mwguerra/rdap-client"
 
 const whoisLookup = async (hostname) => await whoisClient(hostname)
 

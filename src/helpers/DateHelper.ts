@@ -1,5 +1,9 @@
 class DateHelper {
-  public getDateFromString(dateString: string): Date | null {
+  public getDateFromString(dateString: string | null): Date | null {
+    if (!dateString) {
+      return null;
+    }
+
     const normalizedDate = this.normalizeDateString(dateString);
     return normalizedDate ? new Date(normalizedDate) : null;
   }

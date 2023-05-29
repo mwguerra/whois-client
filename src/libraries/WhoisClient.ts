@@ -227,7 +227,7 @@ class WhoisClient {
       }
     }
 
-    console.log(`:: [${new Date().toISOString()}] Domain ${sanitizedDomainName} retrieved with ${testOrder[i]}Connection.`)
+    // console.log(`:: [${new Date().toISOString()}] Domain ${sanitizedDomainName} retrieved with ${testOrder[i]}Connection.`)
     return response
   }
 
