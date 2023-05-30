@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/mwguerra/whois-client/compare/v1.0.2...v1.0.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* tld not defined when searching for server ([0b50f2d](https://github.com/mwguerra/whois-client/commit/0b50f2d0e64f0f7f30dd44efc202a944bdba9db8))
+
+
+
 ## [1.0.2](https://github.com/mwguerra/whois-client/compare/v1.0.1...v1.0.2) (2023-05-29)
 
 
