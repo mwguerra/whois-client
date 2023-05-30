@@ -50,8 +50,8 @@ describe("whois", function() {
             assert.ok(response);
             // assert.strictEqual(response?.domainName?.toLowerCase(), "google.com");
 
-						console.log(response);
-						console.log(new WhoisData(response).buildResponse());
+            // console.log(response);
+            // console.log(new WhoisData(response).buildResponse());
         });
     })
 
@@ -66,8 +66,8 @@ describe("whois", function() {
             assert.ok(response);
             assert.strictEqual(response?.domainName?.toLowerCase(), "google.com");
 
-						console.log(response);
-						console.log(new WhoisData(response).buildResponse());
+            // console.log(response);
+            // console.log(new WhoisData(response).buildResponse());
         });
 
         it("should work with the protocol prefix", async () => {
@@ -75,33 +75,33 @@ describe("whois", function() {
             assert.ok(response);
             assert.strictEqual(response?.domainName?.toLowerCase(), "google.com");
 
-						console.log(response);
-						console.log(new WhoisData(response).buildResponse());
-					});
+            // console.log(response);
+            // console.log(new WhoisData(response).buildResponse());
+        });
 
         it("should find mwguerra.com successfully", async () => {
             const response = await whoisClient("mwguerra.com");
             assert.ok(response);
             assert.strictEqual(response?.domainName?.toLowerCase(), "mwguerra.com");
 
-						console.log(response);
-						console.log(new WhoisData(response).buildResponse());
-					});
+            // console.log(response);
+            // console.log(new WhoisData(response).buildResponse());
+        });
 
         it("should find likker.com.br successfully", async () => {
             const response = await whoisClient("https://likker.com.br");
             assert.ok(response);
             assert.strictEqual(response?.domain?.toLowerCase(), "likker.com.br");
 
-						console.log(response);
-						console.log(new WhoisData(response).buildResponse());
-					});
+            // console.log(response);
+            // console.log(new WhoisData(response).buildResponse());
+        });
 
         it("should fail to lookup a top level domain that does not exist", async () => {
             try {
                 await whoisClient("domain.invalidTopLevelDomain");
             } catch (error: any) {
-                assert.strictEqual(error.message, ERRORS.WhoisResponseEmpty);
+                assert.strictEqual(error.message, ERRORS.UnknownTLD);
             }
         });
 

@@ -12,11 +12,15 @@ const whoisClient = async (domain: string, options: object = {}): Promise<{ [key
         throw new Error(ERRORS.NoDomainError)
     }
 
+    console.log(domain, options)
+
     try {
         jsonResponse = await whoisClient.query(domain, options)
-    } catch (err) {
-        throw new Error(ERRORS.WhoisError)
+    } catch (error) {
+        throw error
     }
+
+    console.log(jsonResponse)
 
     if (typeof jsonResponse === "object" && Object.keys(jsonResponse).length === 0) {
         throw new Error(ERRORS.WhoisResponseEmpty)

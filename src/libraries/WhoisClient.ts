@@ -31,6 +31,15 @@ class WhoisClient {
     const domainHelper = new DomainHelper()
     const sanitizedDomainName = domainHelper.sanitize(domain);
     const tld = sanitizedDomainName.split('.').pop()
+
+    if (!tld) {
+      throw new Error(ERRORS.NoDomainError);
+    }
+
+    if (!whois || !whois.SERVERS || !(tld in whois.SERVERS)) {
+      throw new Error(ERRORS.UnknownTLD);
+    }
+
     return (typeof whois.SERVERS[tld] === 'string') ? { host: whois.SERVERS[tld] } : whois.SERVERS[tld]
   }
 
